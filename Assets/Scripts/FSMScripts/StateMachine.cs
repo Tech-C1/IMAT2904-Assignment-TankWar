@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+
     private Dictionary<Type, BaseState> states;
 
     public BaseState currentState;
@@ -13,13 +14,40 @@ public class StateMachine : MonoBehaviour
     {
         get
         {
-            return currentState; 
+            return currentState;
         }
-
         private set
         {
-            currentState = value; 
+            currentState = value;
         }
     }
 
+    public void SetStates(Dictionary<Type, BaseState> states)
+    {
+        this.states = states;
+    }
+
+    public void Update()
+    {
+        if (CurrentState == null)
+        {
+            CurrentState = states.Values.First();
+        }
+        else
+        {
+            var nextState = CurrentState.StateUpdate();
+
+            if (nextState != null && nextState != CurrentState.GetType())
+            {
+                SwitchToState(nextState);
+            }
+        }
+    }
+
+    void SwitchToState(Type nextState)
+    {
+        CurrentState.StateExit();
+        CurrentState = states[nextState];
+        CurrentState.StateEnter();
+    }
 }

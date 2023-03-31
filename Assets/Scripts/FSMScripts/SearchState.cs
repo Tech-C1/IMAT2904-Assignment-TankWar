@@ -1,18 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SearchState : MonoBehaviour
+public class SearchState : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    private SmartTank smartTank;
+
+    public SearchState(SmartTank smartTank)
     {
-        
+        this.smartTank = smartTank;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override Type StateEnter()
     {
-        
+        return null;
+    }
+
+    public override Type StateExit()
+    {
+        return null;
+    }
+
+    public override Type StateUpdate()
+    {
+        if (Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position) < 30f)
+        {
+            float distance = Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position);
+            Debug.Log("Distance: " + distance);
+
+            Debug.Log("Attack"); 
+            return typeof(AttackState);
+        }
+        else
+        {
+            return null; 
+        }
     }
 }
