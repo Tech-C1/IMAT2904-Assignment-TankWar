@@ -1,19 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SmartTank : MonoBehaviour
+public class SmartTank : AITank
 {
-    // Start is called before the first frame update
-    void Start()
+    private StateMachineComponent stateMachine;
+    public GameObject enemyTank;
+
+    public override void AITankStart()
     {
-        
+        stateMachine = GetComponent<StateMachineComponent>();
+
+        Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>();
+        {
+            states.Add(typeof(SearchState), new SearchState(this));
+            states.Add(typeof(AttackState), new AttackState(this));
+            states.Add(typeof(RetreatState), new RetreatState(this));
+        };
+
+        stateMachine.SetStates(states);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void AITankUpdate()
     {
-        
+
+        if (GetHealthLevel < 50 || GetAmmoLevel < 5)
+        {
+               FollowPathToPoint(enemyTank, 1f);
+        }
+    }
+
+    // Implement the AIOnCollisionEnter(Collision) method
+    public override void AIOnCollisionEnter(Collision collision)
+    {
+
     }
 }

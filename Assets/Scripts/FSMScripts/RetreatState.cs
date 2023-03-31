@@ -1,18 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RetreatState : MonoBehaviour
+public class RetreatState : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    private SmartTank smartTank;
+
+    public RetreatState(SmartTank smartTank)
     {
-        
+        this.smartTank = smartTank;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override Type StateEnter()
     {
-        
+        return null; 
+    }
+
+    public override Type StateExit()
+    {
+        return null; 
+    }
+
+    public override Type StateUpdate()
+    {
+        Debug.Log("RetreatState");
+        return null; 
     }
 }
