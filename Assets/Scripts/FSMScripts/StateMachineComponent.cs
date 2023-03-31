@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachineComponent : StateMachine
+public class StateMachineComponent : MonoBehaviour
 {
 
 }

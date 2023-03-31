@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class SmartTank : AITank
 {
-    private StateMachineComponent stateMachine;
+    private StateMachine stateMachine;
     public GameObject enemyTank;
 
     public override void AITankStart()
     {
-        stateMachine = GetComponent<StateMachineComponent>();
+        stateMachine = GetComponent<StateMachine>();
 
         Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>();
         {
