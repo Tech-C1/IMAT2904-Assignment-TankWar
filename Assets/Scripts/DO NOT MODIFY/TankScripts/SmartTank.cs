@@ -9,6 +9,10 @@ public class SmartTank : AITank
     private StateMachine stateMachine;
     public GameObject enemyTank;
 
+    public GameObject targetTankPosition;
+
+    float sHealth; 
+
     public override void AITankStart()
     {
         stateMachine = GetComponent<StateMachine>();
@@ -26,14 +30,26 @@ public class SmartTank : AITank
     public override void AITankUpdate()
     {
 
-        if (GetHealthLevel < 50 || GetAmmoLevel < 5)
-        {
-               FollowPathToPoint(enemyTank, 1f);
-        }
     }
 
-    // Implement the AIOnCollisionEnter(Collision) method
-    public override void AIOnCollisionEnter(Collision collision)
+    public void MoveToRandomPoint(float normalizedSpeed)
+    {
+        FollowPathToRandomPoint(normalizedSpeed);
+    }
+
+    public void GenPoint()
+    {
+        GenerateRandomPoint();
+    }
+
+    public float returnHealth()
+    {
+        return GetHealthLevel;
+    }
+
+
+// Implement the AIOnCollisionEnter(Collision) method
+public override void AIOnCollisionEnter(Collision collision)
     {
 
     }

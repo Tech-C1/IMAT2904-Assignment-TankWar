@@ -24,7 +24,16 @@ public class AttackState : BaseState
 
     public override Type StateUpdate()
     {
-        Debug.Log("AttackState"); 
+        Debug.Log("AttackState");
+
+        float currentHealth = smartTank.returnHealth();
+
+        if (currentHealth < 50)
+        {
+            return typeof(RetreatState);
+        }
+
+
         return null;
     }
 }

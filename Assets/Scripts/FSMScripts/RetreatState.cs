@@ -7,6 +7,8 @@ public class RetreatState : BaseState
 {
     private SmartTank smartTank;
 
+    bool isLocated = false;
+
     public RetreatState(SmartTank smartTank)
     {
         this.smartTank = smartTank;
@@ -25,6 +27,24 @@ public class RetreatState : BaseState
     public override Type StateUpdate()
     {
         Debug.Log("RetreatState");
-        return null; 
+
+        float time = 10;
+
+        time -= Time.deltaTime;
+        if (time < 10 && !isLocated)
+        {
+            smartTank.MoveToRandomPoint(1f);
+            isLocated = true;
+        }
+
+        else if (time <= 0 && isLocated)
+        {
+            time = 10;
+            isLocated = false;
+
+            smartTank.GenPoint();
+        }
+
+        return null;
     }
 }
