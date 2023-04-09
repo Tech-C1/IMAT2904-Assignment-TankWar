@@ -7,9 +7,11 @@ using UnityEngine;
 public class SmartTank : AITank
 {
     private StateMachine stateMachine;
+
     public GameObject enemyTank;
 
-    public GameObject targetTankPosition;
+    public GameObject basePos1;
+    public GameObject basePos2; 
 
     float sHealth; 
 
@@ -46,6 +48,17 @@ public class SmartTank : AITank
     {
         return GetHealthLevel;
     }
+
+    public void TankFire(GameObject enemyLocation)
+    {
+        FireAtPoint(enemyLocation);
+    }
+
+    public void TanktoPath(GameObject pointInWorld, float normalizedSpeed)
+    {
+        FollowPathToPoint(pointInWorld, normalizedSpeed); 
+    }
+
 
 
 // Implement the AIOnCollisionEnter(Collision) method

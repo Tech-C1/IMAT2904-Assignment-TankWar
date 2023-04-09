@@ -45,6 +45,12 @@ public class RetreatState : BaseState
             smartTank.GenPoint();
         }
 
-        return null;
+        else if (Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position) >= 30f)
+        {
+            return typeof(SearchState);
+        }
+
+            return null;
+        
     }
 }

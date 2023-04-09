@@ -30,7 +30,29 @@ public class AttackState : BaseState
 
         if (currentHealth < 50)
         {
+            Debug.Log("Smart Tank Health below 50");
+
             return typeof(RetreatState);
+        }
+
+        else if (Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position) < 30f)
+        {
+            Debug.Log("Fire at Enemy Tank");
+
+            smartTank.TankFire(smartTank.enemyTank);
+        }
+
+        else if (Vector3.Distance(smartTank.transform.position, smartTank.basePos1.transform.position) < 30f)
+        {
+            Debug.Log("Base Attack");
+
+            smartTank.TankFire(smartTank.basePos1);
+            GameObject.Destroy(smartTank.basePos1);
+        }
+
+        else
+        {
+            smartTank.TanktoPath(smartTank.basePos1, 1f);
         }
 
 

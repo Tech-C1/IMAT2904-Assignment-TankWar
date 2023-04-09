@@ -33,9 +33,18 @@ public class SearchState : BaseState
             float distance = Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position);
             Debug.Log("Distance: " + distance);
 
-            Debug.Log("Attack Transition"); 
+            Debug.Log("Attack Transition");
+
             return typeof(AttackState);
         }
+
+        else if (Vector3.Distance(smartTank.transform.position, smartTank.basePos1.transform.position) < 30f)
+        {
+            Debug.Log("Attack Transition");
+
+            return typeof(AttackState);
+        }
+
         else
         {
             smartTank.MoveToRandomPoint(1f);
@@ -46,7 +55,6 @@ public class SearchState : BaseState
             {
                 smartTank.GenPoint();
                 time = 0;
-
             }
 
             return null; 
