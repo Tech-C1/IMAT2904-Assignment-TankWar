@@ -69,6 +69,7 @@ public class RetreatState : BaseState
             // Switch to the Search State
             return typeof(SearchState);
         }
+
         // Return null value
         return null;
         
