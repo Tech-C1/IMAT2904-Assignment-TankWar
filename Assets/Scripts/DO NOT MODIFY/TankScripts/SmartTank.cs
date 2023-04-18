@@ -7,15 +7,18 @@ using UnityEngine;
 // Smart Tank class which inherits from AI Tank
 public class SmartTank : AITank
 {
+    // Public Dictionaries and GameObject's
+    public Dictionary<GameObject, float> consumablesFound = new Dictionary<GameObject, float>();
+    public Dictionary<GameObject, float> basesFound = new Dictionary<GameObject, float>();
+
+    public GameObject consumablePosition;
+    public GameObject basePosition;
+
     // Type StateMachine called stateMachine
     private StateMachine stateMachine;
 
     // Gameobject called enemyTank
     public GameObject enemyTank;
-
-    // GameObjects for Base Positions 1 & 2
-    public GameObject basePos1;
-    public GameObject basePos2; 
 
     // Float Variable called sHealth
     float sHealth; 
@@ -41,7 +44,28 @@ public class SmartTank : AITank
     // AITankUpdate Function, which updates every frame
     public override void AITankUpdate()
     {
+        consumablesFound = GetAllConsumablesFound;
+        basesFound = GetAllBasesFound;
+    }
 
+    public Dictionary<GameObject, float> GetConsumablesFound()
+    {
+        return consumablesFound;
+    }
+
+    public void SetConsumablePosition(GameObject position)
+    {
+        consumablePosition = position;
+    }
+
+    public Dictionary<GameObject, float> GetBasesFound()
+    {
+        return basesFound;
+    }
+
+    public void SetBasePosition(GameObject position)
+    {
+        basePosition = position;
     }
 
     // The Functions below allow the State classes to access Protected Functions in AI Tank
@@ -64,6 +88,11 @@ public class SmartTank : AITank
     {
         // Returns GetHealthLevel
         return GetHealthLevel;
+    }
+
+    public float returnFuel()
+    {
+        return GetFuelLevel; 
     }
 
     // Public Void Function called TankFire which takes in a GameObject as a parameter

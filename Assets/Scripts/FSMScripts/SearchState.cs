@@ -37,6 +37,18 @@ public class SearchState : BaseState
     // Type called StateUpdate
     public override Type StateUpdate()
     {
+        // Get the Dictionary of consumables found by the SmartTank
+        Dictionary<GameObject, float> consumablesFound = smartTank.GetConsumablesFound();
+
+        // Get the Dictionary of consumables found by the SmartTank
+        Dictionary<GameObject, float> basesFound = smartTank.GetBasesFound();
+
+        // Declare a Float called currentFuel, assigned to returnFuel Function return value
+        float currentFuel = smartTank.returnFuel();
+
+        // Declare a Float called currentHealth, assigned to returnHealth Function return value
+        float currentHealth = smartTank.returnHealth();
+
         // If the Enemy Tank is less than 30 from Smart Tank then do the code below
         if (Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position) < 30f)
         {
@@ -51,14 +63,52 @@ public class SearchState : BaseState
             return typeof(AttackState);
         }
 
-        // Else if Smart Tank distance between it and The Base Positions is less than 30, then do the code below
-        else if (Vector3.Distance(smartTank.transform.position, smartTank.basePos1.transform.position) < 30f)
+        // Else if the count of consumables found is more than 0, then do the code below
+        else if (smartTank.consumablesFound.Count > 0)
+        {
+            // Get the first consumable in the dictionary and set it as the target position
+            GameObject consumablePosition = consumablesFound.First().Key;
+            smartTank.SetConsumablePosition(consumablePosition);
+            smartTank.TanktoPath(consumablePosition, 1f);
+
+            // Output to Console
+            Debug.Log("Finding consumable");
+
+            // Return null value
+            return null; 
+        }
+
+        // Else if the count of Bases found is more than 0, then do the code below
+        else if (basesFound.Count > 0 && basesFound.First().Key != null)
         {
             // Output to Console
-            Debug.Log("Attack Transition");
+            Debug.Log("Base Detected"); 
 
-            // Switch to the Attack State
-            return typeof(AttackState);
+            GameObject basePosition = basesFound.First().Key;
+
+            // if basePosition does not equal to null
+            if (basePosition != null)
+            {
+               // If the distance between the Smart Tank and the Bases' Position is less than 40, then do the code below
+                if (Vector3.Distance(smartTank.transform.position, basePosition.transform.position) < 40f)
+                {
+                    // Output to Console
+                    Debug.Log("Base Attack!");
+
+                    // Fire at the position of the Base
+                    smartTank.TankFire(basePosition);
+                }
+
+                // Else
+                else
+                {
+                    // Go to the Bases' Position, with the Speed of 1
+                    smartTank.TanktoPath(basePosition, 1f);
+                }
+            }
+
+            // Return null value
+            return null;
         }
 
         // Else
@@ -81,7 +131,7 @@ public class SearchState : BaseState
             }
 
             // Return null value
-            return null; 
+            return null;
         }
     }
 }

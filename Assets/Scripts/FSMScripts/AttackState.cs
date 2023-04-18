@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // Class called AttackState which inherits from BaseState
@@ -29,17 +30,20 @@ public class AttackState : BaseState
     // Type called StateUpdate
     public override Type StateUpdate()
     {
+        // Get the Dictionary of Bases found by the SmartTank
+        Dictionary<GameObject, float> basesFound = smartTank.GetBasesFound();
+
         // Output to Console
         Debug.Log("AttackState");
 
         // Declare a Float called currentHealth, assigned to returnHealth Function return value
         float currentHealth = smartTank.returnHealth();
 
-        // If currentHealth is less than 50, then do the code below
-        if (currentHealth < 50)
+        // If currentHealth is less than 30, then do the code below
+        if (currentHealth < 30)
         {
             // Output to Console
-            Debug.Log("Smart Tank Health below 50");
+            Debug.Log("Smart Tank Health below 30");
 
             // Switch to the Retreat State
             return typeof(RetreatState);
@@ -55,25 +59,15 @@ public class AttackState : BaseState
             smartTank.TankFire(smartTank.enemyTank);
         }
 
-        // Else if the Distance between Smart Tank and the Base Position is less than 30, then do the code below
-        else if (Vector3.Distance(smartTank.transform.position, smartTank.basePos1.transform.position) < 30f)
+        else if (Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position) > 30f)
         {
             // Output to Console
-            Debug.Log("Base Attack");
+            Debug.Log("Attack to Search State"); 
 
-            // Call the TankFire Function and pass in the Base Position in the world
-            smartTank.TankFire(smartTank.basePos1);
-
-            // Destroy the GameObject that has been passed in as a parameter
-            GameObject.Destroy(smartTank.basePos1);
+            // Switch to the Search State
+            return typeof(SearchState);
         }
 
-        // Else
-        else
-        {
-            // Move the Smart Tank to the Base Position, at a speed of 1
-            smartTank.TanktoPath(smartTank.basePos1, 1f);
-        }
 
         // Return null value
         return null;
