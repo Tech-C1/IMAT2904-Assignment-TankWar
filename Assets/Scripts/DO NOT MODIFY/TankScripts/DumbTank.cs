@@ -87,7 +87,7 @@ public class DumbTank : AITank
                 if (basePosition != null)
                 {
                     //go close to it and fire
-                    if (Vector3.Distance(transform.position, basePosition.transform.position) < 25f)
+                    if (Vector3.Distance(transform.position, basePosition.transform.position) < 40f)
                     {
                         FireAtPoint(basePosition);
                     }

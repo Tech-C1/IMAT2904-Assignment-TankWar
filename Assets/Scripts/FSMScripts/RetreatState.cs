@@ -32,6 +32,9 @@ public class RetreatState : BaseState
     // Type called StateUpdate
     public override Type StateUpdate()
     {
+        // Declare a Float called currentHealth, assigned to returnHealth Function return value
+        float currentHealth = smartTank.returnHealth();
+
         // Output to Console
         Debug.Log("RetreatState");
 
@@ -41,36 +44,31 @@ public class RetreatState : BaseState
         // The time variable goes down in line with the seconds of deltaTime
         time -= Time.deltaTime;
 
-        // If time is less than 10 and the isLocated Boolean is false then do the code below
-        if (time < 10 && !isLocated)
+        // Move Smart Tank to a random point, with a speed of 1
+        smartTank.MoveToRandomPoint(1f);
+
+        // The time variable goes up in line with the seconds of deltaTime
+        time += Time.deltaTime;
+
+        // If time is more than 10
+        if (time > 10)
         {
-            // Move Smart Tank to a random point, with a speed of 1
-            smartTank.MoveToRandomPoint(1f);
-
-            // isLocated Boolean set to true
-            isLocated = true;
-        }
-
-        // Else if time is less than or equal to 0 and the Boolean is set to true then do the code below
-        else if (time <= 0 && isLocated)
-        {
-            // Time is set to 10
-            time = 10;
-
-            // isLocated set to false
-            isLocated = false;
-
             // Call GenPoint Function
             smartTank.GenPoint();
+
+            // Time is set to 0
+            time = 0;
         }
 
         // Else if the Distance between Smart Tank and Enemy Tank is more than 30, then do the code below
         else if (Vector3.Distance(smartTank.transform.position, smartTank.enemyTank.transform.position) >= 30f)
         {
+            // Output to Console
+            Debug.Log("SearchState");
+
             // Switch to the Search State
             return typeof(SearchState);
         }
-
         // Return null value
         return null;
         
