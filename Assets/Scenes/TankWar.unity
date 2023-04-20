@@ -6755,7 +6755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355035933}
   m_Layer: 0
-  m_Name: SmartTank
+  m_Name: DumbTankTheSecond - RENAME THIS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7300,6 +7300,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2deab07be45bfc04d999bd610fee4dbd, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22841,6 +22842,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78995,8 +78997,7 @@ GameObject:
   - component: {fileID: 1800502787}
   - component: {fileID: 1800502786}
   - component: {fileID: 1800502790}
-  - component: {fileID: 1800502792}
-  - component: {fileID: 1800502791}
+  - component: {fileID: 1800502785}
   m_Layer: 13
   m_Name: Tank
   m_TagString: Tank
@@ -79004,6 +79005,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1800502785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800502784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58948fffe4733604497fe40f012a122f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTankPosition: {fileID: 0}
+  consumablePosition: {fileID: 0}
+  basePosition: {fileID: 0}
 --- !u!65 &1800502786
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79054,7 +79070,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800502784}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 42.5, y: 2, z: 60}
+  m_LocalPosition: {x: 46.5, y: 2, z: 46.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -79160,33 +79176,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1800502791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800502784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a78b8d88826f5418afea82040317d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1800502792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800502784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a0213ae8b74bd4daba966a91f4ca67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTank: {fileID: 1503203547}
-  basePos1: {fileID: 1990406901}
-  basePos2: {fileID: 1327664113}
 --- !u!1 &1813624867
 GameObject:
   m_ObjectHideFlags: 0

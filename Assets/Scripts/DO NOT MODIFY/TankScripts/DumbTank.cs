@@ -109,7 +109,6 @@ public class DumbTank : AITank
                 {
                     GenerateRandomPoint();
                     t = 0;
-
                 }
             }
         }
